@@ -1,0 +1,32 @@
+@import '../../@theme/styles/themes';
+
+@include nb-install-component() {
+  $nb-themes: nb-register-theme((
+    actions-fg:#000000,
+    actions-bg: #000000,
+    actions-separator: #000000,
+    color-fg: #000000,
+  ), corporate, corporate);
+
+  .buttons-row {
+    margin: -0.5rem;
+  }
+
+  button[nbButton] {
+    margin: 0.5rem;
+  }
+
+  .action-icon {
+    @include nb-ltr(margin-right, 0.5rem);
+    @include nb-rtl(margin-left, 0.5rem);
+  }
+  nb-actions {
+    float: right;
+
+    nb-action {
+      border-radius: 4px;
+    }
+  }
+
+
+}

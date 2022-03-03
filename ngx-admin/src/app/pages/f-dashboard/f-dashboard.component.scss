@@ -1,0 +1,138 @@
+@import '../../@theme/styles/themes';
+
+@include nb-install-component() {
+
+  ngx-echarts-pie,
+  ngx-echarts-bar,
+  ngx-echarts-line,
+  ngx-echarts-multiple-xaxis,
+  ngx-echarts-area-stack,
+  ngx-echarts-bar-animation,
+  ngx-echarts-radar {
+    display: block;
+    height: nb-theme(card-height-medium);
+    width: 100%;
+  }
+  ::ng-deep .echart {
+    height: 500px;
+    width: 100%;
+  }
+
+
+  .advanced-devices-legend {
+    div {
+      margin-bottom: 19px;
+    }
+
+    .total-label {
+      font-size: 24px;
+    }
+
+    .total-value {
+      font-size: 36px;
+    }
+  }
+
+  nb-card {
+    height: 100%;
+  }
+  nb-card-body {
+    padding: 0.5rem;
+  }
+
+  chart {
+    height: 90%;
+  }
+
+  .devices-img {
+    width: 100px;
+    height: 100px;
+    background-repeat: no-repeat;
+    float: right;
+  }
+
+  .visitors-statistics {
+    width: 100%;
+  }
+
+
+  [class*=col] {
+    padding: 0 !important;
+  }
+
+  .row {
+    margin: 0;
+  }
+
+  .statistics-chart {
+    margin: 1.5rem 0;
+    width: 100%;
+
+    .echart {
+      display: block;
+      height: 13.75rem;
+      width: 100%;
+    }
+  }
+
+  .chart-values {
+    display: flex;
+
+    span:first-child {
+      padding-left: 0;
+    }
+  }
+
+  nb-icon {
+    margin: 1rem;
+  }
+
+
+  .chart-value {
+    flex: 1;
+
+
+  }
+  .chart-values > span {
+    padding-left: 1rem;
+  }
+
+  .chart-value-success {
+    color: #00c781;
+  }
+
+  .chart-value-fail {
+    color: #ff5252;
+  }
+
+  .chart-value-expired {
+    color: #ffa21a;
+  }
+
+  .h1-custom {
+    font-size: 2.25rem;
+    font-family: Open Sans, sans-serif;
+    font-weight: 500;
+    line-height: 4rem;
+    padding-left: 1rem;
+  }
+  .visitors-statistics-legend ::ng-deep {
+    .legends {
+      padding: 0;
+      margin-left: 0;
+    }
+
+    .legend {
+      flex: 1;
+      margin-left: 0;
+      justify-content: flex-start;
+      margin-right: 0 !important;
+    }
+  }
+
+
+
+
+}
+
+

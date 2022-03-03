@@ -1,0 +1,88 @@
+<nb-card>
+  <!--header-->
+  <nb-card-header>{{title}}</nb-card-header>
+
+  <!--body-->
+  <nb-card-body>
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label">Tên Đăng Nhập</label>
+            <input type="text" nbInput fullWidth name="fName" formControlName="userName">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label">Mật khẩu</label>
+            <input type="text" nbInput fullWidth name="fPassword" formControlName="password">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label">Họ Tên</label>
+            <input type="text" nbInput fullWidth name="fFullName" formControlName="fullName">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label">Loại Authen</label>
+            <nb-select formControlName="authenType" style="width:100%">
+              <nb-option [value]=1>Username/Password</nb-option>
+              <nb-option [value]=2>Google</nb-option>
+              <nb-option [value]=3>Facebook</nb-option>
+            </nb-select>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label">Số Điện Thoại</label>
+            <input type="text" nbInput fullWidth name="fPhone" formControlName="phone">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label">Email</label>
+            <input type="text" nbInput fullWidth name="fEmail" formControlName="email">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label">Quyền</label>
+            <nb-select formControlName="userType" style="width:100%">
+              <nb-option [value]="1">Admin</nb-option>
+              <nb-option [value]="2">Factory</nb-option>
+              <nb-option [value]="3">Common</nb-option>
+            </nb-select>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label">Trạng Thái</label>
+            <nb-select formControlName="status" style="width:100%">
+              <nb-option [value]="0">InActive</nb-option>
+              <nb-option [value]="1">Active</nb-option>
+              <nb-option [value]="2">Pending</nb-option>
+              <nb-option [value]="3">Service Expired</nb-option>
+            </nb-select>
+          </div>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+
+  <!--footer-->
+  <nb-card-footer>
+    <button class="cancel" nbButton status="danger" (click)="cancel()">Đóng</button>
+    <button nbButton status="success" (click)="submit()">Lưu</button>
+  </nb-card-footer>
+</nb-card>

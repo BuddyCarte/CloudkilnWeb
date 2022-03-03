@@ -1,0 +1,20 @@
+<script src="user-management.component.ts"></script>
+<nb-card>
+  <nb-card-header>
+    Quản lý người dùng
+  </nb-card-header>
+
+  <nb-card-header class="actions-card">
+    <nb-actions size="medium">
+      <nb-action icon="plus" class="icon-plus-c" (click)="openAddDialog()"
+                 style="background-image: linear-gradient(to right, #a6c1ff, #598bff);">
+      </nb-action>
+    </nb-actions>
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table class="user-management-table" [settings]="settings" [source]="source"
+                     (deleteConfirm)="onDeleteConfirm($event)" (custom)="onCustomAction($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

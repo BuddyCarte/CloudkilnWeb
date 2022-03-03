@@ -1,0 +1,147 @@
+<nb-card>
+  <!--  <nb-card-header style="text-align:center">-->
+  <!--    SNAPSHOT BROWSER-->
+  <!--  </nb-card-header>-->
+
+  <nb-card-body>
+    <div class="row">
+      <div class="col-lg-3">
+        <nb-card>
+          <nb-card-body>
+            <div class="form-group">
+              <label for="from" class="label">Nhà máy</label>
+              <nb-select fullWidth [selected]="sFactory" (selectedChange)="changeFactory($event)">
+                <nb-option *ngFor="let f of factory" [value]="f">{{ f.fullname }}</nb-option>
+              </nb-select>
+            </div>
+
+            <div class="form-group">
+              <label for="from" class="label">Hầm sấy</label>
+              <nb-select fullWidth #chamberSelect [multiple]="true" [selected]="sChamber"
+                         (selectedChange)="changeChamber($event)"
+                         placeholder="-- Lựa chọn --">
+                <nb-option *ngFor="let c of chamber" [value]="c">{{ c.name }}</nb-option>
+              </nb-select>
+            </div>
+
+            <div class="form-group">
+              <label for="from" class="label">Khoảng thời gian</label>
+              <nb-select selected="0" fullWidth (selectedChange)="changeTimeType($event)">
+                <nb-option value="0">-- Lựa chọn --</nb-option>
+                <nb-option value="1">Ngày</nb-option>
+                <nb-option value="2">Tuần</nb-option>
+                <nb-option value="3">Tháng</nb-option>
+                <nb-option value="4">Năm</nb-option>
+              </nb-select>
+            </div>
+            <div class="form-group">
+              <label for="from" class="label">Số lượng</label>
+              <input nbInput
+                     fullWidth
+                     placeholder="countCycle" id="countCycle"
+                     [(ngModel)]="countCycle"
+                     (ngModelChange)="changeCountCycle($event)">
+            </div>
+
+            <div class="form-group">
+              <label for="from" class="label">Từ ngày</label>
+              <input nbInput
+                     fullWidth
+                     placeholder="From" id="from"
+                     [(ngModel)]="frDate"
+                     readonly
+                     [nbDatepicker]="formpicker">
+              <nb-datepicker format="dd/MM/yyyy" #formpicker></nb-datepicker>
+            </div>
+
+            <div class="form-group">
+              <label for="to" class="label">Đến ngày</label>
+              <input nbInput
+                     fullWidth
+                     placeholder="To" id="to"
+                     [(ngModel)]="toDate"
+                     readonly
+                     [nbDatepicker]="topicker">
+              <nb-datepicker format="dd/MM/yyyy" #topicker></nb-datepicker>
+            </div>
+
+            <div class="form-group" style=" justify-content: center; text-align: center;">
+              <div class="buttons-row">
+                <button status="primary" nbButton hero (click)="getData()">
+                  Truy vấn
+                </button>
+                <!--                <button status="primary" nbButton hero [nbContextMenu]="items">-->
+                <!--                  Add To Chart-->
+                <!--                </button>-->
+              </div>
+            </div>
+
+            <div class="form-group table-responsive">
+              <table class="table">
+                <tr *ngFor="let s of snapshot | paginate: config">
+                  <td>{{s.log_time}}</td>
+                  <td>{{s.snap_id}}</td>
+                </tr>
+
+              </table>
+              <pagination-controls *ngIf="snapshot.length !=0"
+                                   [maxSize]="maxSize"
+                                   [directionLinks]="directionLinks"
+                                   [autoHide]="autoHide"
+                                   [responsive]="responsive"
+                                   [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+                                   [screenReaderPageLabel]="labels.screenReaderPageLabel"
+                                   [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+                                   (pageChange)="onPageChange($event)">
+              </pagination-controls>
+            </div>
+
+          </nb-card-body>
+        </nb-card>
+
+      </div>
+      <div class="col-lg-9">
+        <nb-card>
+          <nb-card-header>
+            Biểu đồ trạng thái
+          </nb-card-header>
+          <nb-card-body>
+            <!--            <chart  type="line" [data]="dataChartDevices"-->
+            <!--                   [options]="options" #chartLine1></chart>-->
+
+            <!--            <div class="chartWrapper">-->
+            <!--              <div class="chartAreaWrapper">-->
+            <!--                <canvas width="700" height="250" #chartDevices></canvas>-->
+            <!--              </div>-->
+            <!--            </div>-->
+
+            <fusioncharts width="100%" height="500" type="scrollline2d" dataFormat="json"
+                          [dataSource]="dataSourceDevices">
+            </fusioncharts>
+            <!--            <chart type="line" [data]="dataChartSensors" [options]="options">-->
+            <!--            </chart>-->
+          </nb-card-body>
+        </nb-card>
+
+        <nb-card>
+          <nb-card-header>
+            Biểu đồ thiết bị
+          </nb-card-header>
+          <nb-card-body>
+            <!--            <div class="chartWrapper">-->
+            <!--              <div class="chartAreaWrapper">-->
+            <!--                <canvas width="700" height="250" #chartSensor></canvas>-->
+            <!--              </div>-->
+            <!--            </div>-->
+
+            <fusioncharts width="100%" height="500" type="scrollline2d" dataFormat="json"
+                          [dataSource]="dataSourceSensors">
+            </fusioncharts>
+            <!--            <chart type="line" [data]="dataChartDevices"-->
+            <!--                   [options]="options" #chartLine1></chart>-->
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

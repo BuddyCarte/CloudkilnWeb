@@ -1,0 +1,65 @@
+<nb-card>
+  <!--header-->
+  <nb-card-header>{{title}}</nb-card-header>
+
+  <!--body-->
+  <nb-card-body>
+    <form [formGroup]="form">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label">Tên nhà máy</label>
+            <input type="text" nbInput fullWidth name="fName" formControlName="factoryName">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label">Số điện thoại</label>
+            <input type="text" nbInput fullWidth name="fPhone" formControlName="phone">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label">Địa chỉ</label>
+            <input type="text" nbInput fullWidth name="fAddress" formControlName="address">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label">Diagram</label>
+            <input type="text" nbInput fullWidth name="fDiagram" formControlName="factoryDiagram">
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="fDescription" class="label">Mô tả</label>
+            <input type="text" nbInput fullWidth id="fDescription" formControlName="factoryDescription">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label class="label">Trạng thái</label>
+            <nb-select formControlName="status" style="width:100%">
+              <nb-option [value]="0">WAITING</nb-option>
+              <nb-option [value]="1">ACTIVE</nb-option>
+              <nb-option [value]="2">PENDING</nb-option>
+              <nb-option [value]="3">EXPIRED</nb-option>
+            </nb-select>
+          </div>
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+
+  <!--footer-->
+  <nb-card-footer>
+    <button class="cancel" nbButton status="danger" (click)="cancel()">Đóng</button>
+    <button nbButton status="success" (click)="submit()">Lưu</button>
+  </nb-card-footer>
+</nb-card>

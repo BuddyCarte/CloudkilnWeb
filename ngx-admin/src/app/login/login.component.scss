@@ -1,0 +1,14 @@
+.login-social-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.custom-btn {
+  margin-top: 0px;
+  height: fit-content;
+  width: 13rem;
+}
+
+.custom-btn:hover {
+  background-color: rgba(0, 162, 255, 0.671);
+}

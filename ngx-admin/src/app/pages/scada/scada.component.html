@@ -1,0 +1,165 @@
+<nb-card>
+  <nb-card-header style="text-align:center">
+    TRẠNG THÁI THIẾT BỊ
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="row">
+      <div class="col-lg-3">
+        <nb-card>
+          <nb-card-body>
+            <div class="form-group">
+              <label for="from" class="label">Nhà máy</label>
+              <nb-select fullWidth [selected]="sFactory" (selectedChange)="changeFactory($event)" style="width:100%">
+                <nb-option *ngFor="let f of factory" [value]="f">{{ f.fullname }}</nb-option>
+              </nb-select>
+            </div>
+
+            <div class="form-group ">
+              <label for="from" class="label">Hầm sấy</label>
+              <nb-select fullWidth [multiple]="true" [selected]="sChamber" (selectedChange)="changeChamber($event)"
+                         style="width:100%;"
+                         placeholder="-- Lựa chọn --">
+                <nb-option *ngFor="let c of chamber" [value]="c">{{ c.name }}</nb-option>
+              </nb-select>
+            </div>
+
+            <div class="form-group">
+              <label for="from" class="label">Từ ngày</label>
+              <input id="from" nbInput fullWidth placeholder="From" [nbDatepicker]="formpicker" [(ngModel)]="frDate">
+              <nb-date-timepicker
+                withSeconds format="dd/MM/yyyy HH:mm:ss"
+                #formpicker></nb-date-timepicker>
+
+            </div>
+
+            <div class="form-group ">
+              <label for="to" class="label">Đến ngày</label>
+              <input nbInput
+                     fullWidth
+                     placeholder="To" id="to"
+                     [(ngModel)]="toDate"
+                     [nbDatepicker]="topicker">
+              <nb-date-timepicker
+                withSeconds format="dd/MM/yyyy HH:mm:ss"
+                #topicker></nb-date-timepicker>
+            </div>
+
+            <div class="form-group table-responsive">
+              <label for="from" class="label">Danh sách snapshot</label>
+              <table class="ng2-smart-table">
+                <tr *ngFor="let s of snapshot  | paginate: config;let i = index" [class.active]="i == highlightRow"
+                    (click)="onChangeSnapshot(s,i)" style="cursor: pointer">
+                  <!--                  <td>-->
+                  <!--                    <nb-radio name="snapshot" (valueChange)="onChangeSnapshot(s)"></nb-radio>-->
+                  <!--                  </td>-->
+                  <td>{{s.snap_id}}</td>
+                  <td>{{s.log_time}}</td>
+                </tr>
+              </table>
+              <pagination-controls *ngIf="snapshot.length !=0"
+                                   [maxSize]="maxSize"
+                                   [directionLinks]="directionLinks"
+                                   [autoHide]="autoHide"
+                                   [responsive]="responsive"
+                                   [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+                                   [screenReaderPageLabel]="labels.screenReaderPageLabel"
+                                   [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+                                   (pageChange)="onPageChange($event)">
+              </pagination-controls>
+            </div>
+
+            <div class="form-group">
+              <label for="from" class="label">Hiển thị</label>
+              <div class="col-sm-9" style="text-align: left">
+                <nb-radio-group fullWidth [(ngModel)]="selectedOption">
+                  <nb-radio *ngFor="let option of rbGroupsOptions"
+                            [style]="{'display':'inline-block'}"
+                            [checked]="option.checked"
+                            [value]="option.value">
+                    {{ option.label }}
+                  </nb-radio>
+                </nb-radio-group>
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+
+        <nb-card [size]="'medium'">
+          <nb-card-header style="text-align:center">
+            Thiết bị hiển thị
+          </nb-card-header>
+
+          <nb-card-body>
+            <div class="form-group row" *ngFor="let d of device">
+              <label for="from" class="col-sm-9 col-form-label">{{d.device_desc}}</label>
+              <div class="col-sm-3">
+                <nb-checkbox (checkedChange)="showHideDetails($event,d)" checked="{{d.checked ===1}}"></nb-checkbox>
+              </div>
+            </div>
+          </nb-card-body>
+        </nb-card>
+
+
+        <div class="form-group row" style=" justify-content: center;">
+          <div class="buttons-row">
+            <button status="primary" nbButton hero (click)="search()">
+              Tìm kiếm
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-9" *ngIf="isShowChamber">
+        <nb-card *ngFor="let c of sChamber">
+          <nb-card-body>
+            <nb-card>
+              <nb-card-header>
+                {{c.name}}
+              </nb-card-header>
+              <nb-card-body>
+                <div>
+                  <p>Device</p>
+                  <div class="form-group row">
+                    <div class="col-sm-4 grid-view" *ngFor="let i of getDataDevicesByChamber(c)"
+                         [style.display]="isShowDevice(i)">
+                      <div class="scada-img"
+                           [style.background-image]="'url(' +i.img+')'">
+                        <span class="scada-img-name">{{i.device_desc }}</span>
+                      </div>
+                      <div class="col-sm-8 champer-details">
+                        <p [style.background-color]="i.backgroundColor" class="dot"></p>
+                        <p>Trạng thái: {{i.state}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <p>Sensor</p>
+                  <div class="form-group row">
+                    <div class="col-sm-4 grid-view" *ngFor="let i of getDataSensorsByChamber(c)"
+                         [style.display]="isShowDevice(i)">
+                      <div class="scada-img"
+                           [style.background-image]="'url(' +i.img+')'">
+                        <span class="scada-img-name">{{i.device_desc }}</span>
+                      </div>
+
+                      <div class="col-sm-8 champer-details">
+                        <p>{{i.device_attribute}}</p>
+                        <p>{{i.value}}</p>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+              </nb-card-body>
+            </nb-card>
+
+          </nb-card-body>
+        </nb-card>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>
