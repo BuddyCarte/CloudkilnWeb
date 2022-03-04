@@ -2,12 +2,10 @@
   "name": "ngx-admin",
   "version": "8.0.0",
   "license": "MIT",
+  "homepage": "https://buddycarte.github.io/CloudkilnWeb/" ,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/akveo/ngx-admin.git"
-  },
-  "bugs": {
-    "url": "https://github.com/akveo/ngx-admin/issues"
+    "url": "https://github.com/BuddyCarte/CloudkilnWeb.git"
   },
   "scripts": {
     "ng": "ng",
@@ -26,7 +24,9 @@
     "docs": "compodoc -p src/tsconfig.app.json -d docs",
     "docs:serve": "compodoc -p src/tsconfig.app.json -d docs -s",
     "release:changelog": "npm run conventional-changelog -- -p angular -i CHANGELOG.md -s",
-    "postinstall": "ngcc --properties es2015 es5 browser module main --first-only --create-ivy-entry-points --tsconfig \"./src/tsconfig.app.json\""
+    "postinstall": "ngcc --properties es2015 es5 browser module main --first-only --create-ivy-entry-points --tsconfig \"./src/tsconfig.app.json\"",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@akveo/ng2-completer": "^9.0.1",
